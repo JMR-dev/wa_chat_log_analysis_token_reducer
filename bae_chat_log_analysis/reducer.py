@@ -1,5 +1,6 @@
 import re
 from collections import defaultdict
+from datetime import date
 from pathlib import Path
 
 import emoji
@@ -24,6 +25,9 @@ def _date_key(month, day, year_short, split_by):
         return str(year)
     elif split_by == 'month':
         return f"{year}-{int(month):02d}"
+    elif split_by == 'week':
+        iso_year, iso_week, _ = date(year, int(month), int(day)).isocalendar()
+        return f"{iso_year}-W{iso_week:02d}"
     else:  # day
         return f"{year}-{int(month):02d}-{int(day):02d}"
 
@@ -31,7 +35,7 @@ def _date_key(month, day, year_short, split_by):
 def reduce_tokens(input_file, output_file, abbreviations, split_by='none'):
     """Replace long usernames and convert emojis to shortened text codes.
 
-    split_by: 'none', 'year', 'month', or 'day'
+    split_by: 'none', 'year', 'month', 'week', or 'day'
     Returns a list of output file paths that were written.
     """
     output_file = Path(output_file)

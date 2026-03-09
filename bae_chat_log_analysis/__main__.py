@@ -7,20 +7,21 @@ from .token_counter import count_tokens
 SOURCE_FILE = Path("bae_chat_logs/Source/WhatsApp_Bae_Chat.txt")
 REDUCED_FILE = Path("bae_chat_logs/Reduced/WhatsApp_Chat-08-03-2026-reduced")
 
-SPLIT_OPTIONS = {'1': 'year', '2': 'month', '3': 'day', '4': 'none'}
+SPLIT_OPTIONS = {'1': 'year', '2': 'month', '3': 'week', '4': 'day', '5': 'none'}
 
 
 def prompt_split_option():
     print("How would you like to split the chat output?")
     print("  1) By year")
     print("  2) By month")
-    print("  3) By day")
-    print("  4) No split (single file)")
+    print("  3) By week")
+    print("  4) By day")
+    print("  5) No split (single file)")
     while True:
-        choice = input("Enter choice (1-4): ").strip()
+        choice = input("Enter choice (1-5): ").strip()
         if choice in SPLIT_OPTIONS:
             return SPLIT_OPTIONS[choice]
-        print("Invalid choice. Please enter 1, 2, 3, or 4.")
+        print("Invalid choice. Please enter 1, 2, 3, 4, or 5.")
 
 
 def main():
